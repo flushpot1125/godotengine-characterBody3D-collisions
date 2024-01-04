@@ -1,0 +1,208 @@
+[gd_scene load_steps=14 format=3 uid="uid://dm8ue7u7ujdpv"]
+
+[ext_resource type="PackedScene" uid="uid://b0mp1javgsdb0" path="res://Player.tscn" id="1_4kxfn"]
+[ext_resource type="Script" path="res://Coin000.gd" id="3_7rg2b"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_cycjx"]
+sky_top_color = Color(0.905882, 0.866667, 0.996078, 1)
+sky_horizon_color = Color(0.846078, 0.897059, 0.939216, 1)
+ground_bottom_color = Color(0.478431, 0.721569, 0.760784, 1)
+ground_horizon_color = Color(0.846078, 0.897059, 0.939216, 1)
+
+[sub_resource type="Sky" id="Sky_4ej4n"]
+sky_material = SubResource("ProceduralSkyMaterial_cycjx")
+
+[sub_resource type="Environment" id="Environment_05ptt"]
+background_mode = 2
+sky = SubResource("Sky_4ej4n")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_penlu"]
+albedo_color = Color(0.658824, 0.996078, 0.921569, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mxd1o"]
+material = SubResource("StandardMaterial3D_penlu")
+size = Vector2(50, 50)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_scd4b"]
+size = Vector3(50, 1, 50)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lcyux"]
+albedo_color = Color(1, 0.76, 0.33, 1)
+metallic = 0.95
+roughness = 0.1
+emission_enabled = true
+emission = Color(1, 0.572549, 0.133333, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_p3606"]
+material = SubResource("StandardMaterial3D_lcyux")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6anrv"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_vb8u8"]
+font_size = 60
+font_color = Color(0.160784, 0.258824, 0.792157, 1)
+
+[sub_resource type="LabelSettings" id="LabelSettings_y5bau"]
+font_size = 60
+font_color = Color(0.298039, 0.172549, 0.827451, 1)
+outline_color = Color(0.603922, 0.984314, 0.733333, 1)
+
+[node name="World" type="Node"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_05ptt")
+
+[node name="Floor" type="StaticBody3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
+mesh = SubResource("PlaneMesh_mxd1o")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
+shape = SubResource("BoxShape3D_scd4b")
+
+[node name="Player" parent="." instance=ExtResource("1_4kxfn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.206177, -0.0236883, 4.31865)
+
+[node name="Camera3D" type="Camera3D" parent="Player"]
+transform = Transform3D(1, -5.82171e-16, 2.59199e-16, 2.59199e-16, 0.743145, 0.669131, -5.82171e-16, -0.669131, 0.743145, 0.206177, 5.5005, 4.1977)
+
+[node name="Coin000" type="Area3D" parent="."]
+collision_mask = 3
+priority = 1
+script = ExtResource("3_7rg2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Coin000"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.673988, 0)
+mesh = SubResource("SphereMesh_p3606")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coin000"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_6anrv")
+
+[node name="Coin001" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5.12589, 0, 3.03593)
+collision_mask = 3
+priority = 1
+script = ExtResource("3_7rg2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Coin001"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.673988, 0)
+mesh = SubResource("SphereMesh_p3606")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coin001"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_6anrv")
+
+[node name="Coin002" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.2514, 0, 3.03593)
+collision_mask = 3
+priority = 1
+script = ExtResource("3_7rg2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Coin002"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.673988, 0)
+mesh = SubResource("SphereMesh_p3606")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coin002"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_6anrv")
+
+[node name="Coin003" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.92886, 0, 9.06876)
+collision_mask = 3
+priority = 1
+script = ExtResource("3_7rg2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Coin003"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.673988, 0)
+mesh = SubResource("SphereMesh_p3606")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coin003"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_6anrv")
+
+[node name="Coin004" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15789, 0, 9.06876)
+collision_mask = 3
+priority = 1
+script = ExtResource("3_7rg2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Coin004"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.673988, 0)
+mesh = SubResource("SphereMesh_p3606")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coin004"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_6anrv")
+
+[node name="Coin005" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15789, 0, 5.85243)
+collision_mask = 3
+priority = 1
+script = ExtResource("3_7rg2b")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Coin005"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.673988, 0)
+mesh = SubResource("SphereMesh_p3606")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Coin005"]
+transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, 0, 0)
+shape = SubResource("SphereShape3D_6anrv")
+
+[node name="HUD" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 648.0
+
+[node name="ScoreArea" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_right = 1152.0
+offset_bottom = 100.0
+
+[node name="Score" type="Label" parent="HUD/ScoreArea"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 50.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "RemainedCoin:6
+"
+label_settings = SubResource("LabelSettings_vb8u8")
+horizontal_alignment = 1
+
+[node name="MessageArea" type="Control" parent="HUD"]
+anchors_preset = 0
+offset_top = 286.0
+offset_right = 1152.0
+offset_bottom = 386.0
+
+[node name="Message" type="Label" parent="HUD/MessageArea"]
+visible = false
+layout_mode = 0
+offset_right = 1152.0
+offset_bottom = 100.0
+text = "Clear!!"
+label_settings = SubResource("LabelSettings_y5bau")
+horizontal_alignment = 1
+
+[connection signal="body_entered" from="Coin000" to="Player" method="_on_coin_000_body_entered"]
+[connection signal="body_entered" from="Coin001" to="Player" method="_on_coin_001_body_entered"]
+[connection signal="body_entered" from="Coin002" to="Player" method="_on_coin_002_body_entered"]
+[connection signal="body_entered" from="Coin003" to="Player" method="_on_coin_003_body_entered"]
+[connection signal="body_entered" from="Coin004" to="Player" method="_on_coin_004_body_entered"]
+[connection signal="body_entered" from="Coin005" to="Player" method="_on_coin_005_body_entered"]
